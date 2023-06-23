@@ -11,6 +11,7 @@ table{
 th, td{
     border: 1px solid #333;
     min-width: 80px;
+   overflow-x: hidden;
 }
 tr{
     height: 20px;
