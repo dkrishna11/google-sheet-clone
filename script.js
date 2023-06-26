@@ -2,6 +2,7 @@
 
 const theadRow = document.getElementById("table-heading-row");
 const tbody = document.getElementById("table-body");
+
 const columns=26;
 const rows=100;
 
@@ -29,9 +30,13 @@ const cutButton=document.getElementById("cut-button");
 const pasteButton=document.getElementById("paste-button");
 const copyButton=document.getElementById("copy-button");
 
+// download 
+
+let download=document.getElementById("download");
+
 let currentCell;
 let cutCell={};
-
+let matrix = new Array(rows);
 
 
 
@@ -115,12 +120,12 @@ fontSize.addEventListener("change", ()=>{
 })
 
 //background color:
-bgColor.addEventListener("click", ()=>{
+bgColor.addEventListener("input", ()=>{
     currentCell.style.backgroundColor=bgColor.value;
 })
 
 // text color:
-textColor.addEventListener("click", ()=>{
+textColor.addEventListener("change", ()=>{
     currentCell.style.color=textColor.value;
 })
 
@@ -135,15 +140,56 @@ fontFamily.addEventListener("click", ()=>{
 cutButton.addEventListener("click", ()=>{
     cutCell={
         style:currentCell.style.cssText,
-        text: currentCell.innerText
+        text:currentCell.innerText
+    }
+    pasteCell={
+        style:null,
+        text:"",
     }
     currentCell.innerText="";
     currentCell.style=null;
 });
 
 pasteButton.addEventListener("click", ()=>{
-    currentCell.style=cutCell.style;
-    currentCell.innerText=cutCell.text;
-})
+    if(cutCell.text || cutCell.style){
+        currentCell.style=cutCell.style;
+        currentCell.innerText=cutCell.text;
+        cutCell=pasteCell
+       
+    }
+    else if(copyCell.copyStyle || copyCell.copyText){
+        currentCell.style=copyCell.copyStyle;
+        currentCell.innerText=copyCell.copyText;
+    }
+});
 
+copyButton.addEventListener("click", ()=>{
+    copyCell={
+        copyStyle:currentCell.style.cssText,
+        copyText: currentCell.innerText
+    }
+});
+
+
+// **************Storing the data in arrays**************
+function updateMatrix(currentCell){
+    let obj={
+        style:currentCell.style.cssText,
+        text:currentCell.innerText,
+        id:currentCell.id
+    };
+
+    let 
+}
+
+download.addEventListener("click", ()=>{
+    for(let row=0;row<rows;row++){
+        matrix[row]=new Array(columns);
+    
+        for(let col=0;col<columns;col++){
+            matrix[row][col]={text:currentCell.innerText};
+            console.log(matrix[row][col]);
+        }
+    }
+})
 

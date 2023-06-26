@@ -15,6 +15,8 @@ th, td{
 }
 tr{
     height: 20px;
+    /* overflow-x: hidden; */
+    /* line-height: 20px; */
 }
 
 td:focus{
